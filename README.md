@@ -1,4 +1,4 @@
-# DCAT2 Null Profile
+# DCAT2 RDFS Inference Profile
 This is a *profile* of the [DCAT2 Null Profile](https://w3id.org/profile/dcat2null) of the [Data Catalog Vocabulary (DCAT) - Version 2](https://www.w3.org/TR/vocab-dcat/) implemented by [SURROUND Australia](https://surroundaustralia.com) to allow for the validation of datasets according to DCAT2.
 
 By *profile*, what is meant here is "A specification that constrains, extends, combines, or provides guidance or explanation about the usage of other specifications." (from [PROF](https://www.w3.org/TR/dx-prof/#definitions)) and, here the *other specification* is DCAT2.
