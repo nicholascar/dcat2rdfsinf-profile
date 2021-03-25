@@ -1,0 +1,124 @@
+@prefix : <https://example.com/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# EXAMPLE 1
+:catalog
+  a dcat:Catalog ;
+  dcterms:title "Imaginary Catalog"@en ;
+  rdfs:label "Imaginary Catalog"@en ;
+  foaf:homepage <http://example.org/catalog> ;
+  dcterms:publisher :transparency-office ;
+  dcterms:language <http://id.loc.gov/vocabulary/iso639-1/en>  ;
+  dcat:dataset :dataset-001  , :dataset-002 , :dataset-003 ;
+.
+
+# EXAMPLE 2
+:transparency-office
+  a foaf:Organization ;
+  rdfs:label "Transparency Office"@en ;
+.
+
+# EXAMPLE 3
+:dataset-001
+  a dcat:Dataset ;
+  dcterms:title "Imaginary dataset"@en ;
+  dcat:keyword "accountability"@en, "transparency"@en, "payments"@en ;
+  dcterms:creator :finance-employee-001 ;
+  dcterms:issued "2011-12-05"^^xsd:date ;
+  dcterms:modified "2011-12-15"^^xsd:date ;
+  dcat:contactPoint <http://example.org/transparency-office/contact> ;
+  dcterms:temporal <http://reference.data.gov.uk/id/quarter/2006-Q1> ;
+  dcat:temporalResolution "P1D"^^xsd:duration ;
+  dcterms:spatial <http://sws.geonames.org/6695072/> ;
+  dcat:spatialResolutionInMeters "30.0"^^xsd:decimal ;
+  dcterms:publisher :finance-ministry ;
+  dcterms:language <http://id.loc.gov/vocabulary/iso639-1/en>  ;
+  dcterms:accrualPeriodicity <http://purl.org/linked-data/sdmx/2009/code#freq-W>  ;
+  dcat:distribution :dataset-001-csv ;
+.
+
+# EXAMPLE 4
+:dataset-001-csv
+  a dcat:Distribution ;
+  dcat:downloadURL <http://www.example.org/files/001.csv> ;
+  dcterms:title "CSV distribution of imaginary dataset 001"@en ;
+  dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> ;
+  dcat:byteSize "5120"^^xsd:decimal ;
+.
+
+# EXAMPLE 5
+:catalog dcat:themeTaxonomy :themes .
+
+:themes
+  a skos:ConceptScheme ;
+  skos:prefLabel "A set of domains to classify documents"@en ;
+  .
+
+:dataset-001 dcat:theme :accountability  .
+
+# EXAMPLE 6
+:accountability
+  a skos:Concept ;
+  skos:inScheme :themes ;
+  skos:prefLabel "Accountability"@en ;
+.
+
+# EXAMPLE 7
+:dataset-001
+  a  dcat:Dataset ;
+  dcterms:type  <http://purl.org/dc/dcmitype/Text> ;
+.
+
+:dataset-001
+  a  dcat:Dataset ;
+  dcterms:type  <http://id.loc.gov/vocabulary/marcgt/man> ;
+.
+
+# EXAMPLE 8
+:dataset-001
+  a  dcat:Dataset ;
+  dcterms:type  <http://purl.org/dc/dcmitype/Text> ;
+  dcterms:type  <http://id.loc.gov/vocabulary/marcgt/man> ;
+  dcterms:type  <http://registry.it.csiro.au/def/datacite/resourceType/Text> ;
+  dcterms:type  <http://registry.it.csiro.au/def/re3data/contentType/doc> ;
+.
+
+<http://registry.it.csiro.au/def/datacite/resourceType/Text>
+  rdfs:label "Text"@en ;
+  dcterms:source "DataCite resource types"@en ;
+.
+
+<http://registry.it.csiro.au/def/re3data/contentType/doc>
+  rdfs:label "Standard office documents"@en ;
+  dcterms:source "Re3data content types"@en ;
+.
+
+# EXAMPLE 9
+:catalog  dcat:record :record-001  .
+
+:record-001
+  a dcat:CatalogRecord ;
+  foaf:primaryTopic :dataset-001  ;
+  dcterms:issued "2011-12-11"^^xsd:date  ;
+.
+
+# EXAMPLE 10
+:dataset-002
+  a dcat:Dataset ;
+  dcat:landingPage <http://example.org/dataset-002.html> ;
+  dcat:distribution :dataset-002-csv ;
+.
+
+:dataset-002-csv
+  a dcat:Distribution ;
+  dcat:accessURL <http://example.org/dataset-002.html> ;
+  dcat:mediaType <https://www.iana.org/assignments/media-types/text/csv> ;
+.

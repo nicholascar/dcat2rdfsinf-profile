@@ -1,0 +1,74 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix prof: <http://www.w3.org/ns/dx/prof/> .
+@prefix role: <http://www.w3.org/ns/dx/prof/role/> .
+@prefix sdo: <https://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+<https://w3id.org/profile/dcat2rdfsinf>
+    a prof:Profile ;
+    dcterms:created "2021-03-23"^^xsd:date ;
+    dcterms:creator <http://orcid.org/0000-0002-8742-7730> ;
+    dcterms:modified "2021-03-23"^^xsd:date ;
+    dcterms:publisher <https://linked.data.gov.au/org/surround> ;
+    skos:definition "This profile of DCAT2 implements no constraints on that specification and exists only to provice a validator resource for automated data validation. Validation rules have been extracted from the standard itself. See the standard for the specification of DCAT2 rules."@en ;
+    skos:prefLabel "DCAT2 Null Profile" ;
+    prof:hasResource 
+    [
+        skos:prefLabel "Specification"@en ;
+        dcterms:description "The DCAT2 specification, as published by W3C"@en ;
+        dcterms:conformsTo <https://www.w3.org/TR/> ;
+        dcterms:format "text/turtle" ;
+        prof:hasArtifact <https://www.w3.org/TR/vocab-dcat/> ;
+        prof:hasRole role:specification
+    ] ,    
+    [
+        skos:prefLabel "Validator in SHACL"@en ;
+        dcterms:description "A SHACL validator Shape file implementing all the ontological rules present in the ontology"@en ;
+        dcterms:conformsTo <https://www.w3.org/TR/shacl/> ;
+        dcterms:format "text/turtle" ;
+        prof:hasArtifact <https://w3id.org/profile/dcat2rdfsinf/validator> ;
+        prof:hasRole role:validation
+    ] ,
+    [
+        skos:prefLabel "DCAT2 Ontology"@en ;
+        dcterms:description "The DCAT2 ontology"@en ;
+        dcterms:format "text/turtle" ;
+        prof:hasArtifact <https://www.w3.org/ns/dcat.ttl> ;
+        prof:hasRole role:schema
+    ] , 
+    [
+        skos:prefLabel "Example of a valid dataset"@en ;
+        dcterms:description "Examples taken from the DCAT2 specification document"@en ;
+        dcterms:format "text/turtle" ;
+        prof:hasArtifact <https://w3id.org/profile/dcat2rdfsinf/examples/valid-spec-egs> ;
+        prof:hasRole role:example
+    ] ,
+    [
+        skos:prefLabel "Example of an invalid dataset"@en ;
+        dcterms:description "The example dataset uses a literal instead of skos:Concepts for the dcat:theme property"@en ;
+        dcterms:format "text/turtle" ;
+        prof:hasArtifact <https://w3id.org/profile/dcat2rdfsinf/examples/invalid-1> ;
+        prof:hasRole role:example
+    ] ,
+    [
+        skos:prefLabel "Validation Commands"@en ;
+        dcterms:description "A text file containing some example pySHACL use to validate the examples"@en ;
+        dcterms:format "text/turtle" ;
+        prof:hasArtifact <https://w3id.org/profile/dcat2rdfsinf/validation-commands> ;
+        prof:hasRole role:guidance
+    ] ;  
+    prof:isProfileOf <https://w3id.org/profile/dcat2null> ;
+.
+
+<http://orcid.org/0000-0002-8742-7730>
+    sdo:name "Nicholas J Car" ;
+    sdo:email "nicholas.car@surroundaustrlaia.com"^^xsd:anyURI ;
+    sdo:affiliation <https://linked.data.gov.au/org/surround> ;
+.
+
+<https://linked.data.gov.au/org/surround> a sdo:Organization ;
+    sdo:name "SURROUND Australia Pty Ltd" ;
+    sdo:url "https://surroundaustralia.com"^^xsd:anyURI ;
+.

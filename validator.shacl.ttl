@@ -1,0 +1,423 @@
+@prefix : <https://w3id.org/profile/dcat2null/shapes/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+
+#
+#   Classes
+#
+
+#
+#   Catalog
+#
+:C
+    a sh:NodeShape ;
+    sh:targetNode dcat:Catalog ;
+    sh:property [
+        sh:path dcterms:hasPart ;
+        sh:class dcat:Resource ;        
+    ] ;
+    sh:message "Requirement C: All values for the property `dcterms:hasPart` on instances of `dcat:Catalog` must indicate an object of class dcat:Resource" ;
+.
+
+#
+#   CatalogRecord
+#
+:CR
+	a sh:NodeShape ;
+	sh:targetClass dcat:CatalogRecord ;    
+    sh:property [
+        sh:path foaf:primaryTopic ;
+        sh:class dcat:Resource ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:message "Requirement CR: There must be one and only one property `foaf:primaryTopic` on instances of `dcat:CatalogRecord` and it must indicate an object of class `dcat:Resource`" ;
+.
+
+#
+#   dcat:DataService
+#
+:DS
+	a sh:NodeShape ;
+	sh:targetClass dcat:DataService ;    
+    sh:property [
+        sh:path dcat:endpointURL ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:message "Requirement DS: Instances of `dcat:DataService` must have one and only one property `dcat:endpointURL` provided" ;
+.
+
+#
+#   dcat:Dataset
+#
+
+
+#
+#   dcat:Distribution
+#
+
+
+#
+#   dcat:Relationship
+#
+:R
+	a sh:NodeShape ;
+	sh:targetClass dcat:Relationship ;    
+    sh:property [
+        sh:path dcterms:relation ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:message "Requirement R: Instances of `dcat:Relationship` must have at least one `dct:relation` property provided" ;
+.
+
+#
+#   dcat:Resource
+#
+
+#
+#   dcat:Role
+#
+
+#
+#   Properties
+#
+
+#
+#   dcat:accessService
+#
+
+#
+#   dcat:accessURL
+#
+:aU-r
+	a sh:PropertyShape ;
+	sh:path dcat:accessURL ;
+    sh:class rdfs:Resource ;
+    sh:description "Requirement aU-r: When the property `dcat:accessURL` is used, its range value must be an instance of `rdfs:Resource`" ;	    
+.
+
+#
+#   dcat:bbox
+#
+
+#
+#   dcat:byteSize
+#
+:bS-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:byteSize ;
+    sh:class dcat:Distribution ;
+    sh:description "Requirement bS-d: When the property `dcat:byteSize` is used, its domain value must be an instance of type `dcat:Distribution`" ;
+.
+
+#
+#   dcat:catalog
+#
+:c-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:catalog ;
+    sh:class dcat:Catalog ;
+    sh:description "Requirement c-d: When the property `dcat:byteSize` is used, its domain value must be an instance of type `dcat:Catalog`" ;
+.
+
+:c-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:catalog ;
+    sh:class dcat:Catalog ;
+    sh:description "Requirement c-r: When the property `dcat:byteSize` is used, its range value must be an instance of type `dcat:Catalog`" ;	
+.
+
+#
+#   dcat:centroid
+#
+:cent-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:centroid ;
+    sh:class dcterms:Location ;
+    sh:description "Requirement cent-d: When the property `dcat:centroid` is used, its domain value must be an instance of type `dcat:Catalog`" ;
+.
+
+#
+#   dcat:compressFormat
+#
+:cF-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:catalog ;
+    sh:class dcterms:MediaType ;
+    sh:description "Requirement cF-d: When the property `dcat:compressFormat` is used, its domain value must be an instance of type `dct:MediaType`" ;
+.
+
+:cF-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:catalog ;
+    sh:class dcat:Distribution ;
+    sh:description "Requirement cF-r: When the property `dcat:compressFormat` is used, its range value must be an instance of type `dcat:Distribution`" ;	
+.
+
+#
+#   dcat:contactPoint
+#
+:cP-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:contactPoint ;
+    sh:class vcard:Kind ;
+    sh:description "Requirement cF-r: When the property `dcat:compressFormat` is used, its range value must be an instance of type `vcard:Kind`" ;	
+.
+
+
+#
+#   dcat:dataset
+#
+:d-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:dataset ;
+    sh:class dcat:Catalog ;
+    sh:description "Requirement d-d: When the property `dcat:dataset` is used, its domain value must be an instance of type `dcat:Catalog`" ;
+.
+
+:d-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:dataset ;
+    sh:class dcat:Dataset ;
+    sh:description "Requirement d-r: When the property `dcat:dataset` is used, its range value must be an instance of type `dcat:Dataset`" ;	
+.
+
+#
+#   dcat:distribution
+#
+:dist-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:distribution ;
+    sh:class dcat:Dataset ;
+    sh:description "Requirement dist-d: When the property `dcat:distribution` is used, its domain value must be an instance of type `dcat:Dataset`" ;
+.
+
+:dist-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:distribution ;
+    sh:class dcat:Distribution ;
+    sh:description "Requirement dist-r: When the property `dcat:distribution` is used, its range value must be an instance of type `dcat:Distribution`" ;	
+.
+
+#
+#   dcat:downloadURL
+#
+:dL-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:downloadURL ;
+    sh:class dcat:Distribution ;
+    sh:description "Requirement dL-d: When the property `dcat:downloadURL` is used, its domain value must be an instance of type `dcat:Distribution`" ;
+.
+
+:dL-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:downloadURL ;
+    sh:class rdfs:Resource ;
+    sh:description "Requirement dL-r: When the property `dcat:downloadURL` is used, its range value must be an instance of `rdfs:Resource`" ;		
+.
+
+#
+#   dcat:endDate
+#
+:eD-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:endDate ;
+    sh:class dcterms:PeriodOfTime ;
+    sh:description "Requirement eD-d: When the property `dcat:endDate` is used, its domain value must be an instance of type `dct:PeriodOfTime`" ;
+.
+
+#
+#   dcat:endpointDescription
+#
+:eD-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:endpointDescription ;
+    sh:class dcat:DataService ;
+    sh:description "Requirement eDesc-d: When the property `dcat:endDate` is used, its domain value must be an instance of type `dcat:DataService`" ;
+.
+
+#
+#   dcat:endpointURL
+#
+:dU-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:endpointURL ;
+    sh:class dcat:DataService ;
+    sh:description "Requirement dL-d: When the property `dcat:endpointURL` is used, its domain value must be an instance of type `dcat:DataService`" ;
+.
+
+:dU-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:endpointURL ;
+    sh:class rdfs:Resource ;
+    sh:description "Requirement dL-r: When the property `dcat:endpointURL` is used, its range value must be an instance of `rdfs:Resource`" ;		
+.
+
+#
+#   dcat:hadRole
+#
+:hR-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:hadRole ;
+    sh:or (
+        [ sh:class prov:Attribution ]
+        [ sh:class dcat:Relationship ]
+    ) ;    
+    sh:description "Requirement dL-d: When the property `dcat:hadRole` is used, its domain value must be an instance of type `prov:Attribution` or `dcat:Relationship` " ;
+.
+
+:hR-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:hadRole ;
+    sh:class dcat:Role;
+    sh:description "Requirement hR-r: When the property `dcat:hadRole` is used, its range value must be an instance of `rdfs:Resource`" ;		
+.
+
+#
+#   dcat:keyword
+#
+
+#
+#   dcat:landingPage
+#
+:lP-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:landingPage ;
+    sh:class foaf:Document ;
+    sh:description "Requirement cF-r: When the property `dcat:landingPage` is used, its range value must be an instance of type `foaf:Document`" ;	
+.
+
+#
+#   dcat:mediaType
+#
+:mT-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:mediaType ;
+    sh:class dcat:Distribution ;
+    sh:description "Requirement mT-d: When the property `dcat:mediaType` is used, its domain value must be an instance of type `dcat:Distribution`" ;
+.
+
+:mT-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:mediaType ;
+    sh:class dcterms:MediaType ;
+    sh:description "Requirement mT-r: When the property `dcat:mediaType` is used, its range value must be an instance of type `dct:MediaType`" ;	
+.
+
+
+#
+#   dcat:packageFormat
+#
+:pF-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:packageFormat ;
+    sh:class dcat:Distribution ;
+    sh:description "Requirement pF-d: When the property `dcat:packageFormat` is used, its domain value must be an instance of type `dcat:Distribution`" ;
+.
+
+:pF-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:packageFormat ;
+    sh:class dcterms:MediaType ;
+    sh:description "Requirement pF-r: When the property `dcat:packageFormat` is used, its range value must be an instance of type `dct:MediaType`" ;	
+.
+
+#
+#   dcat:qualifiedRelation
+#
+:qR-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:qualifiedRelation ;
+    sh:class dcat:Resource ;
+    sh:description "Requirement qR-d: When the property `dcat:qualifiedRelation` is used, its domain value must be an instance of type `dcat:Resource`" ;
+.
+
+:qR-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:qualifiedRelation ;
+    sh:class dcterms:Relationship ;
+    sh:description "Requirement qR-r: When the property `dcat:qualifiedRelation` is used, its range value must be an instance of type `dcat:Relationship`" ;	
+.
+
+#
+#   dcat:record
+#
+:r-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:record ;
+    sh:class dcat:Catalog ;
+    sh:description "Requirement r-d: When the property `dcat:record` is used, its domain value must be an instance of type `dcat:Catalog`" ;
+.
+
+:r-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:record ;
+    sh:class dcat:CatalogRecord ;
+    sh:description "Requirement r-r: When the property `dcat:record` is used, its range value must be an instance of type `dcat:CatalogRecord`" ;	
+.
+
+#
+#   dcat:servesDataset
+#
+:sD-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:servesDataset ;
+    sh:class dcat:DataService ;
+    sh:description "Requirement sD-d: When the property `dcat:servesDataset` is used, its domain value must be an instance of type `dcat:DataService`" ;
+.
+
+:sD-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:servesDataset ;
+    sh:class dcat:Dataset ;
+    sh:description "Requirement sD-r: When the property `dcat:servesDataset` is used, its range value must be an instance of type `dcat:Dataset`" ;	
+.
+
+#
+#   dcat:service
+#
+:s-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:service ;
+    sh:class dcat:Catalog ;
+    sh:description "Requirement s-d: When the property `dcat:service` is used, its domain value must be an instance of type `dcat:Catalog`" ;
+.
+
+:s-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:service ;
+    sh:class dcat:DataService ;
+    sh:description "Requirement s-r: When the property `dcat:service` is used, its range value must be an instance of type `dcat:DataService`" ;	
+.
+
+#
+#   dcat:spatialResolutionInMeters
+#
+:sRM-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:spatialResolutionInMeters ;
+    sh:datatype xsd:decimal ;
+    sh:description "Requirement sRM-r: When the property `dcat:spatialResolutionInMeters` is used, its range value must be an instance of type `xsd:decimal`" ;	
+.
+
+#
+#   dcat:startDate
+#
+:sD-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:startDate ;
+    sh:class dcterms:PeriodOfTime ;
+    sh:description "Requirement sD-d: When the property `dcat:startDate` is used, its domain value must be an instance of type `dct:PeriodOfTime`" ;
+.
+
+#
+#   dcat:temporalResolution
+#
+:tD-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:temporalResolution ;
+    sh:datatype xsd:duration ;
+    sh:description "Requirement tD-r: When the property `dcat:temporalResolution` is used, its range value must be an instance of type `xsd:duration`" ;	
+.
+
+#
+#   dcat:theme
+#
+:th-r a sh:NodeShape ;
+    sh:targetObjectsOf dcat:theme ;
+    sh:class skos:Concept ;
+    sh:description "Requirement th-r: When the property `dcat:theme` is used, its range value must be an instance of type `skos:Concept`" ;	
+.
+
+#
+#   dcat:themeTaxonomy
+#
+:tT-d a sh:NodeShape ;
+    sh:targetSubjectsOf dcat:themeTaxonomy ;
+    sh:class dcat:Catalog ;
+    sh:description "Requirement tT-d: When the property `dcat:themeTaxonomy` is used, its domain value must be an instance of type `dcat:Catalog`" ;
+.
+
+#
+#   foaf:homepage
+#
+
+#
+#   foaf:primaryTopic
+#

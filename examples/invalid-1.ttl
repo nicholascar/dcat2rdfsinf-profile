@@ -1,0 +1,21 @@
+@prefix : <https://example.com/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+:dataset-001
+  a  dcat:Dataset ;
+  dcat:theme "Should be a skos:Concept" ;
+.
+
+:dataset-002
+  a  dcat:Dataset ;
+  dcat:theme :xxx ;  # this is actually valid if inference is used since dcat:theme range value ensures it's inferred to be a skos:Concept
+.
