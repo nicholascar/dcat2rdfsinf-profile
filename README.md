@@ -46,7 +46,7 @@ To cite this profile, please use the following (formulated in [BibTex](http://ww
   version = {1.0},
   date = {2021},
   publisher = {{SURROUND Australia Pty Ltd}},
-  url = {https://w3id.org/profile/dcat2null}
+  url = {https://w3id.org/profile/dcat2rdfsinf}
 }
 ``` 
 
